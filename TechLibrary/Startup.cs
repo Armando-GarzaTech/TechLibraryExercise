@@ -23,21 +23,10 @@ namespace TechLibrary
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(options => options.UseSqlite("Data Source=techLibrary.db"));
-
             services.AddScoped<IBookService, BookService>();
-
-            services.AddCors(options =>
-            {
-                options.AddPolicy("AllowAll",
-                builder =>
-                {
-                    builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
-                });
-            });
-
             services.AddControllers();
-
             services.AddAutoMapper(typeof(Startup));
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,9 +43,18 @@ namespace TechLibrary
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
 
-            app.UseCors("AllowAll");
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "TechLibrary V1");
+            });
+
+            app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
