@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechLibrary", "TechLibrary\
 EndProject
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "TechLibrary.Web", "TechLibrary.Web\TechLibrary.Web.njsproj", "{7AF460D7-5635-476C-9981-B8FC51A09941}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechLibrary.Test", "TechLibrary.Test\TechLibrary.Test\TechLibrary.Test.csproj", "{C8EFBFA2-EE67-4687-AE0B-1DC4DC3A5480}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechLibrary.Test", "TechLibrary.Test\TechLibrary.Test\TechLibrary.Test.csproj", "{C8EFBFA2-EE67-4687-AE0B-1DC4DC3A5480}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{0B8698A3-9E01-4C65-8028-0720572D6083}"
+	ProjectSection(SolutionItems) = preProject
+		ReadMe.md = ReadMe.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
