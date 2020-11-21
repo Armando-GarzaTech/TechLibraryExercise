@@ -6,6 +6,7 @@ using AutoMapper;
 using TechLibrary.Domain;
 using TechLibrary.Models;
 using TechLibrary.Services;
+using TechLibrary.Contracts.Requests;
 
 namespace TechLibrary.Controllers
 {
@@ -46,6 +47,32 @@ namespace TechLibrary.Controllers
             var bookResponse = _mapper.Map<BookResponse>(book);
 
             return Ok(bookResponse);
+        }
+
+        [HttpPost()]
+        public async Task<ActionResult<BookResponse>> FetchBooks(BookPageRequest data)
+        {
+            _logger.LogInformation($"Get {data.PerPage} books");
+
+            var result = await _bookService.GetBooksPageAsync(data.CurrentPage, data.PerPage, data.Filter);
+
+            var response = new BookListResponse
+            {
+                RecordCount = result.RecordCount,
+                Books = _mapper.Map<List<BookResponse>>(_mapper.Map<List<BookResponse>>(result.Books)),
+            };
+
+            return Ok(response);
+        }
+
+        [HttpPost("update")]
+        public async Task<IActionResult> UpdateBook(UpdateBookRequest data)
+        {
+            _logger.LogInformation($"Update Book");
+            var book = _mapper.Map<Book>(data);
+
+            await _bookService.UpdateBookAsync(book);
+            return Ok();
         }
     }
 }
