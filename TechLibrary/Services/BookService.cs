@@ -13,6 +13,8 @@ namespace TechLibrary.Services
     {
         Task<List<Book>> GetBooksAsync();
         Task<Book> GetBookByIdAsync(int bookid);
+        Task<(int RecordCount, IEnumerable<Book> Books)> GetBooksPageAsync(int page, int pageSize, string filter);
+        Task UpdateBookAsync(Book book);
     }
 
     public class BookService : IBookService
@@ -34,6 +36,16 @@ namespace TechLibrary.Services
         public async Task<Book> GetBookByIdAsync(int bookid)
         {
             return await _dataContext.Books.SingleOrDefaultAsync(x => x.BookId == bookid);
+        }
+
+        public Task<(int RecordCount, IEnumerable<Book> Books)> GetBooksPageAsync(int page, int pageSize, string filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateBookAsync(Book book)
+        {
+            throw new NotImplementedException();
         }
     }
 }
